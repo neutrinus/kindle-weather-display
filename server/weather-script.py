@@ -1,4 +1,5 @@
 #!/usr/bin/python2
+# coding=utf-8
 
 # Kindle Weather Display
 # Matthew Petroff (http://mpetroff.net/)
@@ -60,12 +61,12 @@ for day in data['list']:
 
 # Parse dates
 day_one = datetime.datetime.fromtimestamp(data['list'][0]['dt'])
-print(day_one)
+today = datetime.datetime.now()
 
-
-print(highs)
-print(lows)
-print(icons)
+#print(day_one)
+#print(highs)
+#print(lows)
+#print(icons)
 
 #
 # Preprocess SVG
@@ -73,6 +74,9 @@ print(icons)
 
 # Open SVG to process
 output = codecs.open('weather-script-preprocess.svg', 'r', encoding='utf-8').read()
+
+output = output.replace('UPDATE', "updated " + today.strftime("%H:%M"))
+output = output.replace('DATE', day_one.strftime("%d.%m.%Y"))
 
 # Insert icons and temperatures
 output = output.replace('ICON_ONE',icons[0]).replace('ICON_TWO',icons[1]).replace('ICON_THREE',icons[2]).replace('ICON_FOUR',icons[3])
