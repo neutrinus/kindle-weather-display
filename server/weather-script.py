@@ -68,6 +68,9 @@ today = datetime.datetime.now()
 #print(lows)
 #print(icons)
 
+one_day = datetime.timedelta(days=1)
+days_of_week = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+
 #
 # Preprocess SVG
 #
@@ -76,7 +79,7 @@ today = datetime.datetime.now()
 output = codecs.open('weather-script-preprocess.svg', 'r', encoding='utf-8').read()
 
 output = output.replace('UPDATE', "updated " + today.strftime("%H:%M"))
-output = output.replace('DATE', day_one.strftime("%d.%m.%Y"))
+output = output.replace('DATE', days_of_week[today.weekday()] + ", " + day_one.strftime("%d.%m.%Y"))
 
 # Insert icons and temperatures
 output = output.replace('ICON_ONE',icons[0]).replace('ICON_TWO',icons[1]).replace('ICON_THREE',icons[2]).replace('ICON_FOUR',icons[3])
@@ -84,9 +87,9 @@ output = output.replace('HIGH_ONE',str(highs[0])).replace('HIGH_TWO',str(highs[1
 output = output.replace('LOW_ONE',str(lows[0])).replace('LOW_TWO',str(lows[1])).replace('LOW_THREE',str(lows[2])).replace('LOW_FOUR',str(lows[3]))
 
 # Insert days of week
-one_day = datetime.timedelta(days=1)
-days_of_week = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
-output = output.replace('DAY_THREE',days_of_week[(day_one + 2*one_day).weekday()]).replace('DAY_FOUR',days_of_week[(day_one + 3*one_day).weekday()])
+output = output.replace('DAY_TWO',days_of_week[(day_one + 1*one_day).weekday()])
+output = output.replace('DAY_THREE',days_of_week[(day_one + 2*one_day).weekday()])
+output = output.replace('DAY_FOUR',days_of_week[(day_one + 3*one_day).weekday()])
 
 # Write output
 codecs.open('weather-script-output.svg', 'w', encoding='utf-8').write(output)
