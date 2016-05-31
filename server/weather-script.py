@@ -110,7 +110,7 @@ for item in icons:
 print (icons_parse)
 
 # Open SVG to process
-output = codecs.open('weather-template.svg', 'r', encoding='utf-8').read()
+output = codecs.open('weather-template.svg', 'r+', encoding='utf-8').read()
 
 # Insert icons and temperatures
 output = output.replace('ICON_ONE',icons_parse[0]).replace('ICON_TWO',icons_parse[1]).replace('ICON_THREE',icons_parse[2]).replace('ICON_FOUR',icons_parse[3])
